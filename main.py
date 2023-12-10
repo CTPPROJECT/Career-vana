@@ -44,44 +44,98 @@ if tabs == 'Psychographic':
     fig_bar = px.histogram(data_visualize_B, x=selected_factor, color="_employment", title=f"Employment by {selected_factor}")
     st.plotly_chart(fig_bar)
 
+
+
+
+
 # Geographic tab
 elif tabs == 'Geographic':
     st.header("Geographic Section")
 
-    # Load data
-    df = pd.read_csv('data/mock_data.csv')
+    
+    file_path = '/Users/joey/Desktop/Career-vana/data/monster_jobs.csv'
+    monster_jobs_df = pd.read_csv(file_path)
 
-    sectors = st.multiselect('Select Employment Sectors', df['employment_sector'].unique())
-    if not sectors:
-        filtered_df = df
-    else:
-        filtered_df = df[df['employment_sector'].isin(sectors)]
+    
+    state_name_to_code = {
+        'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR',
+        'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
+        'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
+        'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA', 'Kansas': 'KS',
+        'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+        'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
+        'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV',
+        'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY',
+        'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK',
+        'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
+        'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT',
+        'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV',
+        'Wisconsin': 'WI', 'Wyoming': 'WY', 'District of Columbia': 'DC'
+    }
 
-    state_counts = filtered_df['state'].value_counts().reset_index()
-    state_counts.columns = ['state', 'count']
-    state_avg_salary = filtered_df.groupby('state')['salary'].mean().reset_index()
 
-    map_color = st.selectbox('Select Map Color', ['Viridis', 'Cividis', 'Plasma', 'Inferno'])
+    monster_jobs_df['state_code'] = monster_jobs_df['cleaned_states'].map(state_name_to_code)
 
-    map_option = st.selectbox('Select what to display on the map', ['Number of Entries', 'Average Salary'])
+  
+    df_sector = monster_jobs_df[['state_code', 'sector']]
 
-    if map_option == 'Number of Entries':
-        fig = px.choropleth(state_counts, 
-                            locations='state', 
-                            color='count',  
-                            color_continuous_scale=map_color,
-                            scope="usa",
-                            title='Number of Entries per State')
-        st.plotly_chart(fig)
-    elif map_option == 'Average Salary':
-        fig = px.choropleth(state_avg_salary, 
-                            locations='state',  
-                            locationmode="USA-states", 
-                            color='salary',  
-                            color_continuous_scale=map_color,
-                            scope="usa",
-                            title='Average Salary per State')
-        st.plotly_chart(fig)
+    
+    unique_sectors = df_sector['sector'].unique()
+    colors = px.colors.qualitative.Plotly
+    color_discrete_map_sector = {sector: color for sector, color in zip(unique_sectors, colors)}
+
+    
+    df_sector['sector'] = pd.Categorical(df_sector['sector'], categories=color_discrete_map_sector.keys())
+
+    # Please dear god
+    def update_map_sector():
+        selected_state = state_dropdown_sector
+        selected_sector = sector_dropdown
+
+        
+        filtered_df_sector = df_sector[(df_sector['state_code'] == selected_state) & (df_sector['sector'] == selected_sector)]
+
+        
+        fig_sector = px.choropleth(
+            filtered_df_sector,
+            locations='state_code',
+            locationmode="USA-states",
+            color='sector',
+            color_discrete_map=color_discrete_map_sector,
+            scope="usa"
+        )
+        fig_sector.update_layout(title_text=f'Sector: {selected_sector} by State in USA')
+        
+        # Dark transparent background for astheics
+        background_color = "#0E1117"  
+        fig_sector.update_layout(
+            paper_bgcolor=background_color,
+            plot_bgcolor=background_color,
+            geo=dict(
+                bgcolor=background_color,
+                lakecolor='LightBlue',  
+                landcolor='LightGreen',  
+            ),
+            font=dict(
+                family="Arial, sans-serif",
+                size=12,
+                color="#FFFFFF"  
+            )
+        )
+
+        
+        st.plotly_chart(fig_sector)
+
+    #dropdown menus 
+    state_dropdown_sector = st.selectbox('Select a State:', list(state_name_to_code.values()), key='state')
+    sector_dropdown = st.selectbox('Select a Sector:', unique_sectors, key='sector')
+
+    
+    update_map_sector()
+
+
+
+
 
 
 
