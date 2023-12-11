@@ -1,3 +1,4 @@
+from readline import get_completion_type
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -20,65 +21,79 @@ _ = load_dotenv(find_dotenv())
 
 
 
-data_visualize_K = pd.read_csv('data/LocalPayNYC.csv')
-data_visualize_B = pd.read_csv('data/b_dataMod.csv')
+data_visualize = pd.read_csv('data/LocalPayNYC.csv')
 
-tabs = st.sidebar.radio("Select a tab", ('Geographic', 'Psychographic', 'Demographic', 'Find Your Perfect Career Sector', 'Generate Cover Letter'))
+tabs = st.sidebar.radio("Select a tab", ('Geographic', 'Demographic', 'Brendan', 'Find Your Perfect Career Sector', 'Generate Cover Letter'))
 
 # Main content
 st.title("Careers influenced by various factors over the years")
 
+
+
+
+
+
+
+
+
 # Psychographic tab
-if tabs == 'Psychographic':
-    st.header("Psychographic Section")
+if tabs == 'Brendan':
+    st.header("Test PyGWalker")
     
     # Create a list of available factors (columns) in the CSV file
-    available_factors = data_visualize_B.columns.tolist()
+    available_factors = data_visualize.columns.tolist()
 
     # Let the user choose factors (columns) from the CSV file
     col1, col2, col3 = st.columns(3)  # Create two columns for side-by-side display
 
     with col1:
         selected_factor1 = st.selectbox('This factor appears on X-Axis', available_factors, key='factor1')
-        unique_values_factor1 = data_visualize_B[selected_factor1].unique()
+        unique_values_factor1 = data_visualize[selected_factor1].unique()
         st.write(f"Unique values in the selected {selected_factor1} column:", unique_values_factor1)
 
     with col2:
         selected_factor2 = st.selectbox('This factor appears on Y-Axis', available_factors, key='factor2')
-        unique_values_factor2 = data_visualize_B[selected_factor2].unique()
+        unique_values_factor2 = data_visualize[selected_factor2].unique()
         st.write(f"Unique values in the selected {selected_factor2} column:", unique_values_factor2)
         
     with col3:
         selected_factor3 = st.selectbox('This factor provides color', available_factors, key='factor3')
-        unique_values_factor3 = data_visualize_B[selected_factor3].unique()
+        unique_values_factor3 = data_visualize[selected_factor3].unique()
         st.write(f"Unique values in the selected {selected_factor3} column:", unique_values_factor3)
 
     # Display box plots
     st.subheader("Box Plots")
-    fig_box = px.box(data_visualize_B, x=selected_factor1, y=selected_factor2, color=selected_factor3, title=f"{selected_factor1} {selected_factor2}")
+    fig_box = px.box(data_visualize, x=selected_factor1, y=selected_factor2, color=selected_factor3, title=f"{selected_factor1} {selected_factor2}")
     st.plotly_chart(fig_box)
 
     # Display histogram
     st.subheader("Bar Chart")
-    fig_bar = px.histogram(data_visualize_B,x=selected_factor1, y=selected_factor2, color=selected_factor3, title=f"Employment by {selected_factor1}", barmode='group')   
+    fig_bar = px.histogram(data_visualize,x=selected_factor1, y=selected_factor2, color=selected_factor3, title=f"Employment by {selected_factor1}", barmode='group')   
     st.plotly_chart(fig_bar)
     
     # Display line graph
     st.subheader("Line Graph")
-    fig_line = px.line(data_visualize_B, x=selected_factor1, y=selected_factor2, color=selected_factor3, title=f"{selected_factor1} {selected_factor2}")
+    fig_line = px.line(data_visualize, x=selected_factor1, y=selected_factor2, color=selected_factor3, title=f"{selected_factor1} {selected_factor2}")
     st.plotly_chart(fig_line)
     
     # Display Scatter 3D graph
     st.subheader("Line 3D Chart")
-    fig_line_3d = px.line_3d(data_visualize_B, x=selected_factor1, y=selected_factor2, z=selected_factor3, title=f"{selected_factor1} vs {selected_factor2} vs {selected_factor3}")
+    fig_line_3d = px.line_3d(data_visualize, x=selected_factor1, y=selected_factor2, z=selected_factor3, title=f"{selected_factor1} vs {selected_factor2} vs {selected_factor3}")
     fig_line_3d.update_layout(height=800, width=1000)
     st.plotly_chart(fig_line_3d)
     
     # Display Scatter 3D graph
     st.subheader("Scatter 3D Plot")
-    fig_scatter_3d = px.scatter_3d(data_visualize_B, x=selected_factor1, y=selected_factor2, z=selected_factor3, title=f"{selected_factor1} vs {selected_factor2} vs {selected_factor3}")
+    fig_scatter_3d = px.scatter_3d(data_visualize, x=selected_factor1, y=selected_factor2, z=selected_factor3, title=f"{selected_factor1} vs {selected_factor2} vs {selected_factor3}")
     fig_scatter_3d.update_layout(height=800, width=1000)
     st.plotly_chart(fig_scatter_3d)
+
+
+
+
+
+
+
 
 
 
@@ -135,7 +150,7 @@ elif tabs == 'Demographic':
     st.header("Demographic Section")
     selected_factor = st.selectbox('Select a factor', ['gender', 'ethnicity', 'race'])
     if selected_factor == 'gender':
-        data_visualize_K.loc[~data_visualize_K['gender'].isin(['Male', 'Female']), 'gender'] = 'Other gender'
+        data_visualize.loc[~data_visualize['gender'].isin(['Male', 'Female']), 'gender'] = 'Other gender'
         description_box = "Observations: People identifying as male tend to have the highest salaries followed by women and other genders."
         description_bar = "Observations: Highest percentage of all genders are professionals which could also mean that there is just more data on professionals. Some noteworthy comparisons is that there are more men in skilled craft than female and other gender. women least common professions are skilled craft and service maintenance. men least common are technicians and protective service while other genders least common are administrative support, technicians and skilled craft  "
     elif selected_factor == 'ethnicity':
@@ -150,12 +165,12 @@ elif tabs == 'Demographic':
 
     # Display box plot and pie chart
     st.subheader("Box Plot")
-    fig_box = px.box(data_visualize_K, x=selected_factor, y="upper_pay_band_bound", title=f"Pay Distribution by {selected_factor}")
+    fig_box = px.box(data_visualize, x=selected_factor, y="upper_pay_band_bound", title=f"Pay Distribution by {selected_factor}")
     st.write(description_box)
     st.plotly_chart(fig_box)
 
     st.subheader("Bar Plot")
-    fig_bar = px.bar(data_visualize_K, x=selected_factor,color="job_category", barmode ="group",title=f"Distribution of Job Categories by {selected_factor}")
+    fig_bar = px.bar(data_visualize, x=selected_factor,color="job_category", barmode ="group",title=f"Distribution of Job Categories by {selected_factor}")
     st.write(description_bar)
     st.plotly_chart(fig_bar)
 
@@ -373,5 +388,5 @@ elif tabs == 'Generate Cover Letter':
                 )
                 answer = response.choices[0].message.content
 
-    response = get_completion(prompt)
+    response = get_completion_type(prompt)
     st.write(f"Generated Cover Letter: {response}")
