@@ -68,14 +68,23 @@
 <h2 id="setup"> :floppy_disk: What We Used</h2>
 
 <ul>
-  <<li><b><a href="https://huggingface.co/">Hugging Face</a></b> - Where all of the search algorithms reside.</li>
-  <li><b>Streamlit</b> - Where all of the search-based agents reside.</li>
-  <li><b>Jupyter Notebook</b> - The main file that runs Pacman games. This file also describes a Pacman GameState types.</li>
+  <li><b><a href="https://huggingface.co/">Hugging Face</a></b> - </li>
+  <li><b><a href="https://streamlit.io//">Streamlit</b> - We coded our app on Streamlit and every part of it exists within a Streamlit framework</li>
+  <li><b><a href="https://jupyter.org/">Jupyter Notebook</b> - We used Jupyter Notebook to model our data so that we could plug the results into Streamlit.</li>
+  <li><b><a href="https://pandas.pydata.org/">Pandas</b> - We would not be able to model our data without the Pandas library.</li>
+  <li><b><a href="https://numpy.org/">Numpy</b> - Every bit as crucial to our data modeling as Pandas.</li>
+  <li><b><a href="https://scikit-learn.org/stable/">Scikit-Learn</b> - </li>
+  <li><b><a href="https://openai.com/">OpenAI</b> - </li>
 </ul>
 
 <h3>Some of our most valuable references</h3>
 <ul>
-  <li><b>graphicsDisplay.py</b> - Graphics for Pacman.</li>
+  <li><b><a href="https://plotly.com/python/plotly-express/">Plotly</b> - </li>
+  <li><b><a href="https://chat.openai.com/">ChatGPT</b> - </li>
+  <li><b><a href="https://docs.streamlit.io/library/advanced-features/theming">Streamlit Themeing</b> - </li>
+  <li><b><a href="https://www.kaggle.com/">Kaggle</b> - Where we went to find the datasets for our visuals and to train our models.</li>
+  <li><b><a href="https://chat.openai.com/">ChatGPT</b> - </li>
+  <li><b><a href="https://chat.openai.com/">ChatGPT</b> - </li>
 </ul>
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/
