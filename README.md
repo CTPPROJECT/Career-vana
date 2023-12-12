@@ -87,4 +87,4 @@
   <li><b><a href="https://chat.openai.com/">ChatGPT</b> - </li>
 </ul>
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
