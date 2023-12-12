@@ -6,8 +6,8 @@
   <ol>
     <li><a href="#about-the-project"> About The Project</a></li>
     <li><a href="#overview"> Overview</a></li>
-    <li><a href="#setup"> What We Used</a></li>
     <li><a href="#getting-started"> Getting Started</a></li>
+    <li><a href="#setup"> What We Used</a></li>
   </ol>
 </details>
 
@@ -39,22 +39,6 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-<!-- SETUP -->
-<h2 id="setup"> :floppy_disk: What We Used</h2>
-
-<ul>
-  <li><b>Hugging Face</b> - Where all of the search algorithms reside.</li>
-  <li><b>Streamlit</b> - Where all of the search-based agents reside.</li>
-  <li><b>Jupyter Notebook</b> - The main file that runs Pacman games. This file also describes a Pacman GameState types.</li>
-</ul>
-
-<h3>Some of our most valuable references</h3>
-<ul>
-  <li><b>graphicsDisplay.py</b> - Graphics for Pacman.</li>
-</ul>
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
 <!-- GETTING STARTED -->
 <h2 id="getting-started"> :book: Getting Started</h2>
 
@@ -78,6 +62,20 @@
 
 <i>Note that all of the commands that appear in this project also appear in <code>commands.txt</code>, for easy copying and pasting.</i>
 
-
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
+<!-- SETUP -->
+<h2 id="setup"> :floppy_disk: What We Used</h2>
+
+<ul>
+  <li><b>Hugging Face</b> - Where all of the search algorithms reside.</li>
+  <li><b>Streamlit</b> - Where all of the search-based agents reside.</li>
+  <li><b>Jupyter Notebook</b> - The main file that runs Pacman games. This file also describes a Pacman GameState types.</li>
+</ul>
+
+<h3>Some of our most valuable references</h3>
+<ul>
+  <li><b>graphicsDisplay.py</b> - Graphics for Pacman.</li>
+</ul>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
