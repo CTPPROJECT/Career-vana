@@ -68,7 +68,7 @@
 <h2 id="setup"> :floppy_disk: What We Used</h2>
 
 <ul>
-  <li><b>Hugging Face</b> - Where all of the search algorithms reside.</li>
+  <li><b>[Hugging Face](https://huggingface.co/)</b> - Where all of the search algorithms reside.</li>
   <li><b>Streamlit</b> - Where all of the search-based agents reside.</li>
   <li><b>Jupyter Notebook</b> - The main file that runs Pacman games. This file also describes a Pacman GameState types.</li>
 </ul>
