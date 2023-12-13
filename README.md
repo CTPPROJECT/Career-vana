@@ -139,6 +139,6 @@ Embark on this educational adventure with our app, where every step is a burst o
 <ul>
   <li><b><a href="https://brendancostello.github.io/portfolio/">Brendan Costello</a></b> - Wrote README (Hello!) and provided a generally enjoyable experience for all involved along with general project management, deployment, introducing ideas to be implemented.</li>
   <li><b><a href="https://www.linkedin.com/in/henry-d-5665071ba/">Henry Joseph Dugue</a></b> - Geographic expert extraordinaire and the best friend you never new you needed</li>
-<li><b><a href="https://www.linkedin.com/in/kasaf-shah/">Kasaf Shah</a></b> - The genius herself! Wrote the model while leaving everyone in her orbit just a little bit smarter</li>
+<li><b><a href="https://kasafportfolio.vercel.app">Kasaf Shah</a></b> - The genius herself! Wrote the model while leaving everyone in her orbit just a little bit smarter</li>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
